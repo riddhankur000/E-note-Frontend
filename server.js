@@ -18,7 +18,7 @@ env.config();
 const app = express()
 app.use(cors(
   {
-    origin: ["http://localhost:3000"],
+    origin: ["https://enote-backend.vercel.app"],
     methods: ["POST","GET"],
     credentials: true
   }
