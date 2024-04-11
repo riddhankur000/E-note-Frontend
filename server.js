@@ -19,7 +19,7 @@ env.config();
 const app = express()
 app.use(cors(
   {
-    origin: ["https://enote-backend.onrender.com"],
+    origin: ["https://enote-backend.vercel.app"],
     methods: ["POST","GET"],
     credentials: true
   }
@@ -67,13 +67,19 @@ import userschema from "./models/note.js";
 // mongoose.connect(process.env.MONGO_URL);
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
+    const conn = await mongoose.connect(process.env.MONGO_URL);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.log(error);
     process.exit(1);
   }
 }
+
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
+})
 
 
 let User_email = "";
@@ -387,6 +393,3 @@ passport.deserializeUser((user, cb) => {
   cb(null, user);
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
