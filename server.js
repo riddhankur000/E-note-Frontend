@@ -64,7 +64,16 @@ import mongoose from 'mongoose';
 import userschema from "./models/note.js";
 
 // mongoose.connect("mongodb+srv://wrick000:" + process.env.DB_PASSWORD + "@cluster0.tjiylu1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
-mongoose.connect(process.env.MONGO_URL);
+// mongoose.connect(process.env.MONGO_URL);
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+}
 
 
 let User_email = "";
