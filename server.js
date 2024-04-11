@@ -19,7 +19,7 @@ env.config();
 const app = express()
 app.use(cors(
   {
-    origin: ["https://drab-pear-gazelle-hose.cyclic.app"],
+    origin: ["https://enote-backend.onrender.com"],
     methods: ["POST","GET"],
     credentials: true
   }
