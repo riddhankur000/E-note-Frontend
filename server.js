@@ -10,6 +10,7 @@ import session from "express-session";
 import GoogleStrategy from "passport-google-oauth2";
 import nodemailer from "nodemailer";
 import cors from "cors";
+import { MemoryStore } from 'express-session';
 
 
 
@@ -38,13 +39,22 @@ var transporter = nodemailer.createTransport({
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//   })
+// );
+app.use(session({
+  cookie: { maxAge: 86400000 },
+  store: new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
+  resave: false,
+  secret: process.env.SESSION_SECRET,
+}))
+
 app.use(passport.initialize());
 app.use(passport.session());
 
