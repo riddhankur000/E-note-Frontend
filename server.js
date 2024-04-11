@@ -19,7 +19,7 @@ env.config();
 const app = express()
 app.use(cors(
   {
-    origin: ["https://enote-backend.vercel.app"],
+    origin: ["https://drab-pear-gazelle-hose.cyclic.app"],
     methods: ["POST","GET"],
     credentials: true
   }
