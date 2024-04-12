@@ -17,14 +17,14 @@ import { MemoryStore } from 'express-session';
 env.config();
 
 const app = express()
-app.use(cors(
-  {
-    origin: ["https://enote-backend.onrender.com"],
-    methods: ["POST","GET"],
-    credentials: true
-  }
+// app.use(cors(
+//   {
+//     origin: ["http://localhost:3000"],
+//     methods: ["POST","GET"],
+//     credentials: true
+//   }
 
-));
+// ));
 
 const port = process.env.PORT||3000
 
@@ -67,7 +67,7 @@ import userschema from "./models/note.js";
 // mongoose.connect(process.env.MONGO_URL);
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URL);
+    const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.log(error);
