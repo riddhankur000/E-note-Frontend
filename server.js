@@ -13,13 +13,15 @@ import cors from "cors";
 import { MemoryStore } from 'express-session';
 
 
+const CLIENT_URL="https://main--enote0.netlify.app";
 
 env.config();
 
 const app = express()
+
 app.use(cors(
   {
-    origin: ["http://localhost:5173"],
+    origin: [CLIENT_URL],
     methods: ["POST","GET"],
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
@@ -27,7 +29,8 @@ app.use(cors(
 
 ));
 
-const port = process.env.PORT||3000
+const port = process.env.PORT||3000;
+// const CLIENT_URL="http://localhost:5173";
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -119,7 +122,7 @@ app.post("/register", async (req, res) => {
         let result = (await userschema.find({ email: email }));
         if (result.length) {
           // console.log("1");
-          res.status(401).redirect("http://localhost:5173/login/ar");
+          res.status(401).redirect(CLIENT_URL+"/login/ar");
         } else {
           // console.log("2");
           result = await userschema.insertMany([data]);
@@ -140,7 +143,7 @@ app.post("/register", async (req, res) => {
             }
           });
           User_email = email;
-          res.cookie("user", token).redirect("http://localhost:5173/Notes");
+          res.cookie("user", token).redirect(CLIENT_URL+"/Notes");
           // res.cookie("user", token).redirect("http://localhost:5173/Notes");
           // res.render("secrets.ejs");
         }
@@ -170,7 +173,7 @@ app.post('/api/login', async (req, res) => {
       // console.log(db_data);
       // res.header().render("secrets.ejs");
       
-      res.redirect("http://localhost:5173/Notes");
+      res.redirect(CLIENT_URL+"/Notes");
     }
   }
   else {
@@ -193,7 +196,7 @@ app.post('/api/login', async (req, res) => {
                 console.log("redirect");
                 // res.redirect("http://localhost:5173/Notes");
                 // const message={code:"redirect"};
-                res.cookie("user", token).redirect("http://localhost:5173/Notes");
+                res.cookie("user", token).redirect(CLIENT_URL+"/Notes");
                 // res.redirect("/secrets");
               }
               else {
@@ -201,7 +204,7 @@ app.post('/api/login', async (req, res) => {
                 // console.log(message);
 
                 // res.send({code:"incorrect_password"});
-                res.status(401).redirect("http://localhost:5173/login/ip");
+                res.status(401).redirect(CLIENT_URL+"/login/ip");
 
 
               }
@@ -209,11 +212,11 @@ app.post('/api/login', async (req, res) => {
           })
         }
         else {
-          res.status(404).redirect("http://localhost:5173/login/nr");
+          res.status(404).redirect(CLIENT_URL+"/login/nr");
         }
       }
       else {
-        res.status(404).redirect("http://localhost:5173/login/nr");
+        res.status(404).redirect(CLIENT_URL+"/login/nr");
 
       }
     }
@@ -228,7 +231,7 @@ app.post('/api/login', async (req, res) => {
 
 app.get("/secrets", async (req, res) => {
   console.log(User_email)
-  res.redirect("http://localhost:5173/Notes");
+  res.redirect(CLIENT_URL+"/Notes");
 })
 
 
@@ -242,8 +245,8 @@ app.get(
 app.get(
   "/auth/google/Enote",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:5173/Notes",
-    failureRedirect: "http://localhost:5173",
+    successRedirect: CLIENT_URL+"/Notes",
+    failureRedirect: CLIENT_URL,
   })
 );
 
@@ -363,7 +366,7 @@ app.post('/api/adduser', async (req, res) => {
       // res.header().render("secrets.ejs");
       User_email = db_data[0].email;
       console.log(User_email);
-      res.redirect("http://localhost:5173/Notes");
+      res.redirect(CLIENT_URL+"/Notes");
       // res.redirect
     }
   }
