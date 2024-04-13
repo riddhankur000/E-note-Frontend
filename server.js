@@ -272,7 +272,7 @@ passport.use(
           //   "INSERT INTO users (email, password) VALUES ($1, $2)",
           //   [profile.email, "google"]
           // );
-          const newUser = await userschema.insertMany([{ email: profile.email, password: null }]);
+          const newUser = await userschema.insertMany([{ email: profile.email, password: null,username: profile.given_name }]);
           User_email = newUser[0].email;
           // console.log("Hello",newUser)
           console.log("useremail:",User_email);
