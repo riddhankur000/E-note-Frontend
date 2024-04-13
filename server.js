@@ -287,7 +287,7 @@ passport.use(
 );
 
 app.post('/api/add', async (req, res) => {
-  console.log(req.body);
+  console.log("api/add",req.body);
   let data = { heading: req.body.heading, text: req.body.text };
   // console.log(data);
   await userschema.updateOne({ email: User_email }, { $push: { notes: data } });
