@@ -19,7 +19,7 @@ env.config();
 const app = express()
 app.use(cors(
   {
-    origin: ["https://enote-backend.onrender.com"],
+    origin: ["http://localhost:5173"],
     methods: ["POST","GET"],
     credentials: true
   }
