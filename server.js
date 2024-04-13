@@ -271,12 +271,13 @@ passport.use(
           const newUser = await userschema.insertMany([{ email: profile.email, password: null }]);
           User_email = newUser[0].email;
           // console.log("Hello",newUser)
-
+          console.log("useremail:",User_email);
           // google_auth_data={Email:newUser.email,}
           // let token = jwt.sign({ id: result[0]._id, username: new[0].username }, process.env.JWTSECRET, { expiresIn: "20s" });
           return cb(null, newUser[0]);
         } else {
           User_email = result[0].email;
+          console.log("useremail:",User_email);
           return cb(null, result[0]);
         }
       } catch (err) {
