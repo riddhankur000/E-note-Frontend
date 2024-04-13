@@ -13,7 +13,7 @@ import cors from "cors";
 import { MemoryStore } from 'express-session';
 
 
-const CLIENT_URL="https://main--enote0.netlify.app";
+const CLIENT_URL="https://enote0.netlify.app";
 
 env.config();
 
