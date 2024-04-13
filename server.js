@@ -118,7 +118,7 @@ app.post("/register", async (req, res) => {
         let result = (await userschema.find({ email: email }));
         if (result.length) {
           // console.log("1");
-          res.status(401).redirect("http://localhost:5173/login/ar");
+          res.status(401).redirect("https://localhost:5173/login/ar");
         } else {
           // console.log("2");
           result = await userschema.insertMany([data]);
@@ -139,7 +139,7 @@ app.post("/register", async (req, res) => {
             }
           });
           User_email = email;
-          res.cookie("user", token).redirect("http://localhost:5173/Notes");
+          res.cookie("user", token).redirect("https://localhost:5173/Notes");
           // res.cookie("user", token).redirect("http://localhost:5173/Notes");
           // res.render("secrets.ejs");
         }
@@ -169,14 +169,14 @@ app.post('/api/login', async (req, res) => {
       // console.log(db_data);
       // res.header().render("secrets.ejs");
       
-      res.redirect("http://localhost:5173/Notes");
+      res.redirect("https://localhost:5173/Notes");
     }
   }
   else {
     try {
       let RESULT = await userschema.find({ email: req.body.Email });
 
-      console.log(RESULT);
+      console.log("LOGIN",RESULT);
       if (RESULT.length) {
 
         if (RESULT[0].password != null) {
@@ -191,7 +191,7 @@ app.post('/api/login', async (req, res) => {
                 console.log("redirect");
                 // res.redirect("http://localhost:5173/Notes");
                 // const message={code:"redirect"};
-                res.cookie("user", token).redirect("http://localhost:5173/Notes");
+                res.cookie("user", token).redirect("https://localhost:5173/Notes");
                 // res.redirect("/secrets");
               }
               else {
@@ -199,7 +199,7 @@ app.post('/api/login', async (req, res) => {
                 // console.log(message);
 
                 // res.send({code:"incorrect_password"});
-                res.status(401).redirect("http://localhost:5173/login/ip");
+                res.status(401).redirect("https://localhost:5173/login/ip");
 
 
               }
@@ -207,11 +207,11 @@ app.post('/api/login', async (req, res) => {
           })
         }
         else {
-          res.status(404).redirect("http://localhost:5173/login/nr");
+          res.status(404).redirect("https://localhost:5173/login/nr");
         }
       }
       else {
-        res.status(404).redirect("http://localhost:5173/login/nr");
+        res.status(404).redirect("https://localhost:5173/login/nr");
 
       }
     }
@@ -226,7 +226,7 @@ app.post('/api/login', async (req, res) => {
 
 app.get("/secrets", async (req, res) => {
   console.log(User_email)
-  res.redirect("http://localhost:5173/Notes");
+  res.redirect("https://localhost:5173/Notes");
 })
 
 
@@ -240,8 +240,8 @@ app.get(
 app.get(
   "/auth/google/secrets",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:5173/Notes",
-    failureRedirect: "http://localhost:5173",
+    successRedirect: "https://localhost:5173/Notes",
+    failureRedirect: "https://localhost:5173",
   })
 );
 
@@ -358,7 +358,7 @@ app.post('/api/adduser', async (req, res) => {
       // res.header().render("secrets.ejs");
       User_email = db_data[0].email;
       console.log(User_email);
-      res.redirect("http://localhost:5173/Notes");
+      res.redirect("https://localhost:5173/Notes");
       // res.redirect
     }
   }
