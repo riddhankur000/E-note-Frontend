@@ -17,14 +17,14 @@ import { MemoryStore } from 'express-session';
 env.config();
 
 const app = express()
-app.use(cors(
-  {
-    origin: ["https://enote-backend.onrender.com"],
-    methods: ["POST","GET"],
-    credentials: true
-  }
+// app.use(cors(
+//   {
+//     origin: ["http://localhost:5173"],
+//     methods: ["POST","GET"],
+//     credentials: true
+//   }
 
-));
+// ));
 
 const port = process.env.PORT||3000
 
