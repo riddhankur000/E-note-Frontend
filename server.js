@@ -21,7 +21,8 @@ app.use(cors(
   {
     origin: ["http://localhost:5173"],
     methods: ["POST","GET"],
-    credentials: true
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
   }
 
 ));
@@ -252,7 +253,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.BASE_URL+"/auth/google/secrets",
+      callbackURL: "http://localhost:3000/auth/google/secrets",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     async (accessToken, refreshToken, profile, cb) => {
@@ -295,7 +296,8 @@ app.post('/api/add', async (req, res) => {
   // let index=db_data[0].notes.length;
   // await userschema.updateOne({email:User_email},{'notes.-1.index':index});
   db_data = (await userschema.find({ email: User_email }))
-
+  console.log("This is add post");
+  console.log(db_data[0].notes);
   // console.log(data);
   // note.insertMany([{index:1,heading:"Heading 1",text:"Hello World"}]);
   // console.log(await student.aggregate([{$match:{name:"Hello"}},{$addFields:{"obj.roll":"69"}}]))
