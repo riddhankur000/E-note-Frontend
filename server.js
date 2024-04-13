@@ -176,6 +176,7 @@ app.post('/api/login', async (req, res) => {
     try {
       let RESULT = await userschema.find({ email: req.body.Email });
 
+      console.log("LOGIN",req.body);
       console.log("LOGIN",RESULT);
       if (RESULT.length) {
 
