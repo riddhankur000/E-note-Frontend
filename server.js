@@ -240,7 +240,7 @@ app.get(
 );
 
 app.get(
-  "/auth/google/secrets",
+  "/auth/google/Enote",
   passport.authenticate("google", {
     successRedirect: "http://localhost:5173/Notes",
     failureRedirect: "http://localhost:5173",
@@ -253,7 +253,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/secrets",
+      // callbackURL: "/auth/google/secrets",
+      callbackURL: "http://enote-backend.onrender.com/auth/google/Enote",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     async (accessToken, refreshToken, profile, cb) => {
