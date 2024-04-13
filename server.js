@@ -265,7 +265,7 @@ passport.use(
         // const result = await db.query("SELECT * FROM users WHERE email = $1", [
         //   profile.email,
         // ]);
-        // console.log(profile);
+        console.log(profile);
         const result = (await userschema.find({ email: profile.email }));
         if (result.length == 0) {
           // const newUser = await db.query(
